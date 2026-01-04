@@ -1,24 +1,35 @@
 package com.goldenkazoo.orphonos;
 
 import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.goldenkazoo.orphonos.adapters.CategoryAdapter;
+import com.goldenkazoo.orphonos.models.Category;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    private RecyclerView recyclerView;
+    private ArrayList<Category> categories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        recyclerView = findViewById(R.id.recyclerCategories);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        categories = new ArrayList<>();
+        categories.add(new Category("Salutations"));
+        categories.add(new Category("Remerciements"));
+        categories.add(new Category("Urgence"));
+        categories.add(new Category("Questions"));
+
+        CategoryAdapter adapter = new CategoryAdapter(categories, this);
+        recyclerView.setAdapter(adapter);
     }
 }
