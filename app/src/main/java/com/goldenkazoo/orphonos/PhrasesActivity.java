@@ -31,16 +31,23 @@ public class PhrasesActivity extends AppCompatActivity {
 
         phrases = new ArrayList<>();
 
-        if ("Salutations".equals(categorie)) {
+        if ("Salutations".equals(categorie))
+        {
             phrases.add(new Phrase("Bonjour", R.raw.bonjour));
             phrases.add(new Phrase("Bonsoir", R.raw.bonsoir));
-        } else if ("Remerciements".equals(categorie)) {
+        }
+        else if ("Remerciements".equals(categorie))
+        {
             phrases.add(new Phrase("Merci", R.raw.merci));
             phrases.add(new Phrase("Merci beaucoup", R.raw.merci_beaucoup));
-        } else if ("Urgence".equals(categorie)) {
+        }
+        else if ("Urgence".equals(categorie))
+        {
             phrases.add(new Phrase("Au secours !", R.raw.au_secours));
             phrases.add(new Phrase("Appelez un médecin", R.raw.appelez_medecin));
-        } else if ("Questions".equals(categorie)) {
+        }
+        else if ("Questions".equals(categorie))
+        {
             phrases.add(new Phrase("Comment ça va ?", R.raw.comment_ca_va));
         }
 

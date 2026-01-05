@@ -2,6 +2,7 @@ package com.goldenkazoo.orphonos.adapters;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ public class PhraseAdapter extends RecyclerView.Adapter<PhraseAdapter.ViewHolder
 
     private ArrayList<Phrase> phrases;
     private Context context;
+    private MediaPlayer mediaPlayer; // INSTANCE PARTAGÉE
 
     public PhraseAdapter(ArrayList<Phrase> phrases, Context context) {
         this.phrases = phrases;
@@ -38,8 +40,26 @@ public class PhraseAdapter extends RecyclerView.Adapter<PhraseAdapter.ViewHolder
         holder.btnPhrase.setText(phrase.getTexte());
 
         holder.btnPhrase.setOnClickListener(v -> {
-            MediaPlayer mediaPlayer = MediaPlayer.create(context, phrase.getSonId());
-            mediaPlayer.start();
+
+            // 1️⃣ Si un son est déjà en train de jouer, on l'arrête
+            if (mediaPlayer != null) {
+                mediaPlayer.stop();
+                mediaPlayer.release();
+                mediaPlayer = null;
+            }
+
+            // 2️⃣ Créer et jouer le nouveau son
+            mediaPlayer = MediaPlayer.create(v.getContext(), phrase.getSonId());
+            if (mediaPlayer != null) {
+                mediaPlayer.start();
+                // Libérer la ressource quand le son se termine
+                mediaPlayer.setOnCompletionListener(mp -> {
+                    mp.release();
+                    mediaPlayer = null;
+                });
+            } else {
+                Log.e("PhraseAdapter", "MediaPlayer null pour : " + phrase.getTexte());
+            }
         });
     }
 
@@ -54,6 +74,14 @@ public class PhraseAdapter extends RecyclerView.Adapter<PhraseAdapter.ViewHolder
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             btnPhrase = itemView.findViewById(R.id.btnPhrase);
+        }
+    }
+
+    public void releaseMediaPlayer() {
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer = null;
         }
     }
 }

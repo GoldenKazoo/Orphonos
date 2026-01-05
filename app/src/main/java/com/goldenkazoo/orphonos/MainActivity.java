@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         categories = new ArrayList<>();
         categories.add(new Category("Salutations"));
+        categories.add(new Category("Quotidien"));
         categories.add(new Category("Remerciements"));
         categories.add(new Category("Urgence"));
         categories.add(new Category("Questions"));
