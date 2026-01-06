@@ -10,13 +10,15 @@ import com.goldenkazoo.orphonos.models.Category;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+{
 
     private RecyclerView recyclerView;
     private ArrayList<Category> categories;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         categories.add(new Category("Remerciements"));
         categories.add(new Category("Urgence"));
         categories.add(new Category("Questions"));
+        categories.add(new Category("Medicaments"));
 
         CategoryAdapter adapter = new CategoryAdapter(categories, this);
         recyclerView.setAdapter(adapter);

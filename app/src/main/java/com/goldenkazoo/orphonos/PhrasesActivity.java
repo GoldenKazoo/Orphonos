@@ -11,14 +11,16 @@ import com.goldenkazoo.orphonos.models.Phrase;
 
 import java.util.ArrayList;
 
-public class PhrasesActivity extends AppCompatActivity {
+public class PhrasesActivity extends AppCompatActivity
+{
 
     private RecyclerView recyclerView;
     private TextView tvCategory;
     private ArrayList<Phrase> phrases;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phrases);
 
