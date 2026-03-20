@@ -41,14 +41,14 @@ public class PhraseAdapter extends RecyclerView.Adapter<PhraseAdapter.ViewHolder
 
         holder.btnPhrase.setOnClickListener(v -> {
 
-            // 1️⃣ Si un son est déjà en train de jouer, on l'arrête
+            // Si son est déjà en train de jouer, on l'arrête
             if (mediaPlayer != null) {
                 mediaPlayer.stop();
                 mediaPlayer.release();
                 mediaPlayer = null;
             }
 
-            // 2️⃣ Créer et jouer le nouveau son
+            // creer et jouer le nouveau son
             mediaPlayer = MediaPlayer.create(v.getContext(), phrase.getSonId());
             if (mediaPlayer != null) {
                 mediaPlayer.start();
